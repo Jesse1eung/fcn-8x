@@ -22,7 +22,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(filename)s:%(lineno)
 
 def parse_args(check=True):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--checkpoint_path', type=str,default='/data/ai100/vgg/vgg_16.ckpt')
+    parser.add_argument('--checkpoint_path', type=str,default='/data/ai100/vgg16/vgg_16.ckpt')
     parser.add_argument('--output_dir', type=str,default='/output')
     parser.add_argument('--dataset_train', type=str,default='/data/ljx20012/qz10/fcn_train1.record')
     parser.add_argument('--dataset_val', type=str,default='/data/ljx20012/qz10/fcn_val1.record')
