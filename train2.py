@@ -3,10 +3,6 @@ import argparse
 import os
 import time
 
-dirpath='/home/xiasan/quiz-w9/quiz-w9-code'
-
-os.chdir(dirpath)
-os.getcwd()
 
 import cv2
 import numpy as np
