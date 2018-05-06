@@ -123,7 +123,7 @@ with tf.variable_scope('vgg_16/fc8'):
     aux_logits_8s = slim.conv2d(pool3_feature, number_of_classes, [1, 1],
                                  activation_fn=None,
                                  weights_initializer=tf.zeros_initializer,
-                                 scope='conv_pool4')
+                                 scope='conv_pool3')
 
 upsampled_logits = upsampled_logits + aux_logits_8s 
 
@@ -342,4 +342,12 @@ with sess:
                 cv2.imwrite(os.path.join(FLAGS.output_dir, 'eval', 'val_{0}_prediction_crfed.jpg'.format(gs)), cv2.cvtColor(grayscale_to_voc_impl(np.squeeze(crf_ed)), cv2.COLOR_RGB2BGR))
 
                 overlay = cv2.addWeighted(cv2.cvtColor(np.squeeze(val_orig_image), cv2.COLOR_RGB2BGR), 1, cv2.cvtColor(grayscale_to_voc_impl(np.squeeze(crf_ed)), cv2.COLOR_RGB2BGR), 0.8, 0)
-                cv2.imwrite(os.pa
+                cv2.imwrite(os.path.join(FLAGS.output_dir, 'eval', 'val_{0}_overlay.jpg'.format(gs)), overlay)
+
+    coord.request_stop()
+    coord.join(threads)
+
+    save_path = saver.save(sess, os.path.join(log_folder, "model.ckpt"), global_step=gs)
+    logging.debug("Model saved in file: %s" % save_path)
+
+summary_string_writer.close()
