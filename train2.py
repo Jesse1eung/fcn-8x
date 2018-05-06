@@ -111,7 +111,7 @@ upsampled_logits = upsampled_logits + aux_logits_16s
 upsample_filter_np_x2_two = bilinear_upsample_weights(2,  # upsample_factor,
                                                   number_of_classes)
 
-upsample_filter_tensor_x2_two = tf.Variable(upsample_filter_np_x2_two, name='vgg_16/pool5/x2')
+upsample_filter_tensor_x2_two = tf.Variable(upsample_filter_np_x2_two, name='vgg_16/fc8/t_conv_x2')
 
 upsampled_logits = tf.nn.conv2d_transpose(upsampled_logits, upsample_filter_tensor_x2_two,
                                           output_shape=tf.shape(upsampled_logits),
