@@ -22,10 +22,10 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(filename)s:%(lineno)
 
 def parse_args(check=True):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--checkpoint_path', type=str,default='/data/ai100/vgg16/vgg_16.ckpt')
-    parser.add_argument('--output_dir', type=str,default='/output')
-    parser.add_argument('--dataset_train', type=str,default='/data/ljx20012/qz10/fcn_train1.record')
-    parser.add_argument('--dataset_val', type=str,default='/data/ljx20012/qz10/fcn_val1.record')
+    parser.add_argument('--checkpoint_path', type=str)
+    parser.add_argument('--output_dir', type=str)
+    parser.add_argument('--dataset_train', type=str)
+    parser.add_argument('--dataset_val', type=str)
     parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--max_steps', type=int, default=1500)
     parser.add_argument('--learning_rate', type=float, default=1e-4)
@@ -119,7 +119,7 @@ upsampled_logits = tf.nn.conv2d_transpose(upsampled_logits, upsample_filter_tens
                                           padding='SAME')
 
 pool3_feature = end_points['vgg_16/pool3']
-with tf.variable_scope('vgg_16/pool_8x'):
+with tf.variable_scope('vgg_16/fc8'):
     aux_logits_8s = slim.conv2d(pool3_feature, number_of_classes, [1, 1],
                                  activation_fn=None,
                                  weights_initializer=tf.zeros_initializer,
@@ -342,12 +342,4 @@ with sess:
                 cv2.imwrite(os.path.join(FLAGS.output_dir, 'eval', 'val_{0}_prediction_crfed.jpg'.format(gs)), cv2.cvtColor(grayscale_to_voc_impl(np.squeeze(crf_ed)), cv2.COLOR_RGB2BGR))
 
                 overlay = cv2.addWeighted(cv2.cvtColor(np.squeeze(val_orig_image), cv2.COLOR_RGB2BGR), 1, cv2.cvtColor(grayscale_to_voc_impl(np.squeeze(crf_ed)), cv2.COLOR_RGB2BGR), 0.8, 0)
-                cv2.imwrite(os.path.join(FLAGS.output_dir, 'eval', 'val_{0}_overlay.jpg'.format(gs)), overlay)
-
-    coord.request_stop()
-    coord.join(threads)
-
-    save_path = saver.save(sess, os.path.join(log_folder, "model.ckpt"), global_step=gs)
-    logging.debug("Model saved in file: %s" % save_path)
-
-summary_string_writer.close()
+                cv2.imwrite(os.pa
