@@ -2,7 +2,7 @@
 本代码为系列课程, 第九周部分的课后作业内容。
 http://edu.csdn.net/lecturer/1427
 
-# TinymMind上GPU运行费用较贵，每 CPU 每小时 $0.09，每 GPU 每小时 $0.99，所有作业内容推荐先在本地运行出一定的结果，保证运行正确之后，再上传到TinyMind上运行。初始运行推荐使用CPU运行资源，待所有代码确保没有问题之后，再启动GPU运行。
+# 初始运行推荐使用CPU运行资源，待所有代码确保没有问题之后，再启动GPU运行。
 
 TinyMind上Tensorflow已经有1.4的版本，能比1.3的版本快一点，推荐使用。
 
@@ -17,7 +17,7 @@ TinyMind上Tensorflow已经有1.4的版本，能比1.3的版本快一点，推�
 
 VOC网址：http://host.robots.ox.ac.uk/pascal/VOC/voc2012/
 
-本次作业不提供数据集下载，请学员自行到上述网址找到并下载数据，同时请仔细阅读VOC网站对于数据集的描述。
+上述网址下载数据，同时请仔细阅读VOC网站对于数据集的描述。
 
 VOC数据集目录结构如下：
 ```
@@ -94,16 +94,16 @@ python3 convert_fcn_dataset.py --data_dir=/path/to/VOCdevkit/VOC2012/ --output_d
 请参考week7,week8中的内容，这里不再详述。
 
 ### 预训练模型
-预训练模型使用tensorflow，modelzoo中的VGG16模型，请学员自行到modelzoo中查找并将该预训练模型放到tinymind上。
+预训练模型使用tensorflow，modelzoo中的VGG16模型，到modelzoo中查找并将该预训练模型放gpu上。
 
-网络有问题的学员，可以使用已经预先上传到tinymind的模型，数据集为**ai100/vgg16**.
+数据集为**ai100/vgg16**.
 
 ### 模型
 模型代码以课程视频week9 FCN部分的代码进行了修改，主要是代码整理，添加了数据输入和结果输出的部分。
 
 代码参考：https://gitee.com/ai100/quiz-w9-code.git
 
-在tinymind上新建一个模型，模型设置参考如下模型：
+模型设置参考如下模型：
 
 https://www.tinymind.com/ai100/quiz-w9-fcn
 
@@ -130,11 +130,11 @@ opencv-python
 
 >FC论文参考 https://arxiv.org/abs/1411.4038
 ### 作业内容
-- 学员需要将convert_fcn_dataset.py中的代码补全并生成对应的数据集文件上传到tinymind。
-- 学员需要在作业提供的代码基础上添加8X的FCN实现并进行训练。
+- 需要将convert_fcn_dataset.py中的代码补全并生成对应的数据集文件上传到tinymind。
+- 需要在作业提供的代码基础上添加8X的FCN实现并进行训练。
 
 
-> tinymind上有已经上传好的[数据集](https://www.tinymind.com/ai100/datasets/quiz-w9)，仅供测试和参考，作业中请自己处理数据集并上传，使用这个数据集的作业数据集部分不给分。
+> 网上有已经上传好的[数据集](https://www.tinymind.com/ai100/datasets/quiz-w9)，仅供测试和参考，作业中请自己处理数据集并上传，使用这个数据集的作业数据集部分不给分。
 
 ### 结果评估
 
@@ -142,7 +142,7 @@ opencv-python
 - 数据集中应包含train和val两个tfrecord文件，大小在400MB左右
 
 #### 模型训练完成-20分：
-在tinymind运行log的输出中，可以看到如下内容：
+运行log的输出中，可以看到如下内容：
 ```sh
 2018-01-04 11:11:20,088 - DEBUG - train.py:298 - step 1200 Current Loss: 101.153938293
 2018-01-04 11:11:20,088 - DEBUG - train.py:300 - [23.54] imgs/s
